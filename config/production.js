@@ -1,6 +1,6 @@
 module.exports = {
   app: {
-    koaPort: process.env.APP_KOA_PORT,
-    grpcPort: process.env.APP_GRPC_PORT,
+    koaPort: 5000,
+    grpcPort: 5500,
   },
 };
