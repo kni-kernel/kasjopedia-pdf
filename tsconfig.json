@@ -15,7 +15,7 @@
       "@services/*": ["services/*"],
       "@utils/*": ["utils/*"]
     },
-    "lib": ["es2019"],
+    "lib": ["es2019", "dom"],
     "resolveJsonModule": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
