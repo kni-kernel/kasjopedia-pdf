@@ -9,6 +9,7 @@
     "build": "tsc && cd frontend && npm run build",
     "serve": "node -r ./tsconfig-paths-bootstrap.js dist/server.js",
     "start": "npm run watch-server",
+    "postinstall": "cd frontend && npm i",
     "prettier": "prettier --write \"src/**/*.{ts,js}\" --write \"frontend/**/*.{vue,js}\"",
     "prettier-check": "prettier-check \"src/**/*.{ts,js}\" \"frontend/**/*.{tsx,ts}\""
   },
