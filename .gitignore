@@ -1,0 +1,18 @@
+node_modules
+dist
+coverage
+.idea
+.env
+
+frontend/node_modules
+frontend/dist
+
+.vscode
+*.iml
+
+# Ignore dev configs
+/config/local-*
+
+*.pdf
+
+.DS_Store

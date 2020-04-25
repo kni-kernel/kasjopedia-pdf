@@ -1,0 +1,44 @@
+{
+  "name": "kasjopeja-pdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/server.js",
+  "scripts": {
+    "test": "jest --forceExit --coverage --verbose --runInBand --passWithNoTests",
+    "watch-server": "nodemon --watch 'src/**/*' --watch 'frontend/src/**/*' -e ts,tsx --exec ts-node -r tsconfig-paths/register ./src/server.ts",
+    "build": "tsc && cd frontend && npm run build",
+    "serve": "node -r ./tsconfig-paths-bootstrap.js dist/server.js",
+    "start": "npm run watch-server",
+    "prettier": "prettier --write \"src/**/*.{ts,js}\" --write \"frontend/**/*.{vue,js}\"",
+    "prettier-check": "prettier-check \"src/**/*.{ts,js}\" \"frontend/**/*.{tsx,ts}\""
+  },
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "config": "^3.3.1",
+    "koa": "^2.8.2",
+    "koa-mount": "^4.0.0",
+    "koa-static": "^5.0.0",
+    "puppeteer": "^2.0.0",
+    "reflect-metadata": "^0.1.13",
+    "tsconfig-paths": "^3.9.0"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.29",
+    "@types/config": "0.0.36",
+    "@types/jest": "^24.0.23",
+    "@types/koa": "^2.0.52",
+    "@types/koa-mount": "^4.0.0",
+    "@types/koa-router": "^7.0.42",
+    "@types/koa-static": "^4.0.1",
+    "@types/node": "^12.12.11",
+    "@types/puppeteer": "^2.0.0",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.3",
+    "prettier": "^1.19.1",
+    "prettier-check": "^2.0.0",
+    "ts-jest": "^24.1.0",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.7.2"
+  }
+}
