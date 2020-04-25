@@ -4,7 +4,7 @@ import Koa from "koa";
 import serve from "koa-static";
 import mount from "koa-mount";
 import * as path from "path";
-import {generateSemesterPlan} from "@services/Generator";
+import { generateSemesterPlan } from "@services/Generator";
 
 const app = new Koa();
 
