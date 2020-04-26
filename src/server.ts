@@ -5,7 +5,13 @@ import Koa from "koa";
 import serve from "koa-static";
 import mount from "koa-mount";
 import * as path from "path";
+
+import { ServerUnaryCall } from "@grpc/grpc-js";
+
 import { generateSemesterPlan } from "@services/Generator";
+
+import GrpcGenerateSemesterPlanRequest from "@interfaces/GrpcGenerateSemesterPlanRequest";
+import GrpcGenerateSemesterPlanResponse from "@interfaces/GrpcGenerateSemesterPlanResponse";
 
 const app = new Koa();
 
@@ -36,7 +42,13 @@ export async function initGrpcServer(port: number) {
 
   // @ts-ignore
   server.addService(generatorProto.SpzGeneratorService.service, {
-    generateSpz: async (call: any, callback: any) => {
+    generateSpz: async (
+      call: ServerUnaryCall<
+        GrpcGenerateSemesterPlanRequest,
+        GrpcGenerateSemesterPlanResponse
+      >,
+      callback: any
+    ) => {
       try {
         const payload = JSON.parse(call.request.content);
         const pdfData = await generateSemesterPlan(payload);
