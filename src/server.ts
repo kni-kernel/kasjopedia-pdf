@@ -1,5 +1,6 @@
+import * as grpc from "@grpc/grpc-js";
+import * as protoLoader from "@grpc/proto-loader";
 import config from "config";
-import fs from "fs";
 import Koa from "koa";
 import serve from "koa-static";
 import mount from "koa-mount";
@@ -17,15 +18,53 @@ export async function initServer(port: number) {
   return app.listen(port);
 }
 
+export async function initGrpcServer(port: number) {
+  const packageDefinition = protoLoader.loadSync(
+    `${__dirname}/../protos/spz.proto`,
+    {
+      keepCase: true,
+      longs: String,
+      enums: String,
+      defaults: true,
+      oneofs: true
+    }
+  );
+  const generatorProto = grpc.loadPackageDefinition(packageDefinition)
+    .spzgenerator;
+
+  const server = new grpc.Server();
+
+  // @ts-ignore
+  server.addService(generatorProto.SpzGeneratorService.service, {
+    generateSpz: async (call: any, callback: any) => {
+      try {
+        const payload = JSON.parse(call.request.content);
+        const pdfData = await generateSemesterPlan(payload);
+        callback(null, { blob: pdfData.toString() });
+      } catch (err) {
+        callback(err, null);
+      }
+    }
+  });
+
+  server.bindAsync(
+    `0.0.0.0:${port}`,
+    grpc.ServerCredentials.createInsecure(),
+    () => {
+      console.info(`Grpc running at 0.0.0.0:${port}`);
+      return server.start();
+    }
+  );
+}
+
 try {
   const port: number = config.get("app.koaPort");
-  initServer(port);
+  const grpcPort: number = config.get("app.grpcPort");
 
-  console.info(`Listening to http://localhost:${port}`);
-  setTimeout(async () => {
-    const pdfData = await generateSemesterPlan({ test: true });
-    fs.writeFileSync("./test.pdf", pdfData);
-  }, 2000);
+  initServer(port);
+  initGrpcServer(grpcPort);
+
+  console.info(`Koa running at http://localhost:${port}`);
 } catch (err) {
   console.error(err);
 }
