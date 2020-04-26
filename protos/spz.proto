@@ -11,5 +11,5 @@ message GenerateSpzRequest {
 }
 
 message GeneratedSpzResponse {
-  string blob = 1;
+  bytes blob = 1;
 }
