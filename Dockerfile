@@ -34,6 +34,7 @@ ENV NODE_ENV=${NODE_ENV}
 
 ## Copy config files
 COPY config ./config
+COPY protos ./protos
 COPY tsconfig.json ./
 COPY tsconfig-paths-bootstrap.js ./
 
