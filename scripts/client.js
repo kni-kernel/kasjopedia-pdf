@@ -1,3 +1,4 @@
+const fs = require("fs");
 const grpc = require("@grpc/grpc-js");
 const protoLoader = require("@grpc/proto-loader");
 
@@ -18,6 +19,7 @@ function main() {
     }
 
     console.log("resp", response);
+    fs.writeFileSync("./test.pdf", response.blob);
   });
 }
 
