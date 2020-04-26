@@ -40,7 +40,7 @@ export async function initGrpcServer(port: number) {
       try {
         const payload = JSON.parse(call.request.content);
         const pdfData = await generateSemesterPlan(payload);
-        callback(null, { blob: pdfData.toString() });
+        callback(null, { blob: pdfData });
       } catch (err) {
         callback(err, null);
       }
