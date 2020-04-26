@@ -16,6 +16,8 @@
   "author": "",
   "license": "",
   "dependencies": {
+    "@grpc/grpc-js": "^1.0.3",
+    "@grpc/proto-loader": "^0.5.4",
     "config": "^3.3.1",
     "koa": "^2.8.2",
     "koa-mount": "^4.0.0",
