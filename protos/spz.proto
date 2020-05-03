@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package spzgenerator;
+
+service SpzGeneratorService {
+  rpc GenerateSpz (GenerateSpzRequest) returns (GeneratedSpzResponse) {}
+}
+
+message GenerateSpzRequest {
+  string content = 1;
+}
+
+message GeneratedSpzResponse {
+  bytes blob = 1;
+}
