@@ -11,6 +11,7 @@ export const generateSemesterPlan = async (
   planData: SemesterPlan
 ): Promise<Buffer> => {
   try {
+    console.log("Payload", planData);
     const dataBuffer = Buffer.from(JSON.stringify(planData));
     const base64encodedData = encodeURIComponent(dataBuffer.toString("base64"));
     const browser = await puppeteer.launch({

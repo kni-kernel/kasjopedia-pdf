@@ -2,18 +2,76 @@ const fs = require("fs");
 const grpc = require("@grpc/grpc-js");
 const protoLoader = require("@grpc/proto-loader");
 
-const packageDefinition = protoLoader.loadSync("./protos/spz.proto", {keepCase: true,
+const packageDefinition = protoLoader.loadSync("./protos/spz.proto", {
+  keepCase: true,
   longs: String,
   enums: String,
   defaults: true,
   oneofs: true
 });
-const generatorProto = grpc.loadPackageDefinition(packageDefinition).spzgenerator;
+const generatorProto = grpc.loadPackageDefinition(packageDefinition)
+  .spzgenerator;
 
 function main() {
-  const client = new generatorProto.SpzGeneratorService('localhost:5500', grpc.credentials.createInsecure());
+  const client = new generatorProto.SpzGeneratorService(
+    "localhost:5500",
+    grpc.credentials.createInsecure()
+  );
 
   const content = {
+    album: "297893",
+    email: "piotr@moszkowicz.pl",
+    fieldOfStudy: "IS",
+    firstName: "Piotr",
+    lastName: "Moszkowicz",
+    semester: 7,
+    studyDegree: 1,
+    studyYear: "2020/21",
+    actualYear: "2020/21",
+    deficitSubjects: [],
+    regularSubjects: [
+      {
+        _id: "5ee4cc339887ad278e902057",
+        name: "Praca dyplomowa",
+        ects: 15,
+        academicYear: "2017/2018",
+        level: 1,
+        fieldOfStudy: "IS",
+        semester: 7,
+        hours: "0/0/0/45/0/0",
+        checkbox: true
+      }
+    ],
+    electiveSubjects: [
+      {
+        _id: "5ee4cc359887ad278e902074",
+        name: "Przetwarzanie danych w chmurach obliczeniowych",
+        ects: 6,
+        academicYear: "2017/2018",
+        level: 1,
+        fieldOfStudy: "IS",
+        semester: 0,
+        hours: "30/0/15/0/0/0",
+        faculty: "WFiIS"
+      },
+      {
+        _id: "5ee4cc359887ad278e902077",
+        name: "Grafika 3D",
+        ects: 6,
+        academicYear: "2017/2018",
+        level: 1,
+        fieldOfStudy: "IS",
+        semester: 0,
+        hours: "30/0/30/0/0/0",
+        faculty: "WFiIS"
+      }
+    ],
+    additionalSubjects: [],
+    previousSemesterSubjects: [],
+    noAttendence: []
+  };
+
+  /* const content = {
     album: 297893,
     email: "piotr@moszkowicz.pl",
     fieldOfStudy: "IS",
@@ -83,7 +141,7 @@ function main() {
     additionalSubjects: [],
     previousSemesterSubjects: [],
     noAttendence: []
-  };
+  }; */
 
   client.generateSpz({ content: JSON.stringify(content) }, (err, response) => {
     if (err) {
