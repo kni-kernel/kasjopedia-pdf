@@ -22,7 +22,7 @@
         <VText class="ft11" variant="xs-right">
           <strong>
             Prodziekan ds. studenckich <br />
-            dr. inż. Paweł ARMATYS
+            dr. inż. Katarzyna MATUSIAK
           </strong>
         </VText>
       </VCol>
